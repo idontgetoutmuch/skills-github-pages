@@ -24,6 +24,8 @@ The second line makes some notations available. We'll talk about that further do
 
 # Probability spaces and probability measures
 
+$$g=f \varphi_\alpha^{-1}=f \varphi_\beta^{-1} \varphi_\beta \varphi_\alpha^{-1}=h \varphi_\beta \varphi_\alpha^{-1}$$
+
 ```lean
 import Mathlib.Geometry.Manifold.MFDeriv.Defs
 import Mathlib.Geometry.Manifold.Instances.Real

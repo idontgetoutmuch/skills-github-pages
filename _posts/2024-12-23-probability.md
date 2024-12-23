@@ -24,6 +24,34 @@ The second line makes some notations available. We'll talk about that further do
 
 # Probability spaces and probability measures
 
+```lean
+import Mathlib.Geometry.Manifold.MFDeriv.Defs
+import Mathlib.Geometry.Manifold.Instances.Real
+import Mathlib.Analysis.InnerProductSpace.PiL2
+import Mathlib.Geometry.Manifold.AnalyticManifold
+import Mathlib.Geometry.Manifold.ContMDiff.Atlas
+import Mathlib.Geometry.Manifold.MFDeriv.SpecificFunctions
+
+open Manifold
+
+open SmoothManifoldWithCorners
+
+theorem mfderivWithin_congr_of_eq_on_open
+  {m n : ℕ} {M N : Type*}
+  [TopologicalSpace M]
+  [ChartedSpace (EuclideanSpace ℝ (Fin m)) M]
+  [SmoothManifoldWithCorners (𝓡 m) M]
+  [TopologicalSpace N]
+  [ChartedSpace (EuclideanSpace ℝ (Fin n)) N]
+  [SmoothManifoldWithCorners (𝓡 n) N]
+  (f g : M → N) (s : Set M)
+  (ho : IsOpen s)
+  (he : ∀ x ∈ s, f x = g x) :
+  ∀ x ∈ s, mfderivWithin (𝓡 m) (𝓡 n) f s x = mfderivWithin (𝓡 m) (𝓡 n) g s x := by
+    intros x hy
+    exact mfderivWithin_congr (IsOpen.uniqueMDiffWithinAt ho hy) he (he x hy)
+```
+
 First, in order to work on probability we need a measurable space.
 We can define a probability measure on such a space as follows.
 ```lean

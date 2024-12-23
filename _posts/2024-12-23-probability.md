@@ -24,6 +24,8 @@ The second line makes some notations available. We'll talk about that further do
 
 # Probability spaces and probability measures
 
+This sentence uses `$` delimiters to show math inline: $\sqrt{3x-1}+(1+x)^2$
+
 $$g=f \varphi_\alpha^{-1}=f \varphi_\beta^{-1} \varphi_\beta \varphi_\alpha^{-1}=h \varphi_\beta \varphi_\alpha^{-1}$$
 
 ```lean

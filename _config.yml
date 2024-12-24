@@ -1,2 +1,4 @@
 theme: minima
 title: whatever
+markdown: kramdown
+highlighter: rouge

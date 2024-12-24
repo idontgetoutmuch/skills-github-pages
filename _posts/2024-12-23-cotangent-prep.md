@@ -19,7 +19,7 @@ with a smooth inverse. By the chain rule for calculus we have
 
 $$
 \frac{\partial g}{\partial x_i}=\sum_j \frac{\partial h}{\partial y_j}(y(x)) \frac{\partial y_j}{\partial x_i}(x)
-
+$$
 
 # Transition Maps are Smooth
 

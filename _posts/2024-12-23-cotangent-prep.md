@@ -3,16 +3,28 @@ date: 2024-12-23
 title: Vanishing Derivatives
 ---
 
-Suppose we have smooth $f : M \longrightarrow \mathbb{R}$.
+Suppose we have smooth $f : M \longrightarrow \mathbb{R}$. Then we can
+define the derivative of $f$ to be $0$ at a point $a$ if for a chart
+$\phi_\alpha$ then $D(f \circ \phi_\alpha^{-1}) = 0$. But this may not
+be well-defined. Suppose $\phi_\beta$ is another chart, setting $g \triangleq f \circ \phi_\alpha^{-1}$ and $g \triangleq f \circ \phi_\beta^{-1}$ then
 
 $$
-g=f \varphi_\alpha^{-1}=f \varphi_\beta^{-1} \varphi_\beta \varphi_\alpha^{-1}=h \varphi_\beta \varphi_\alpha^{-1}
+g=f \phi_\alpha^{-1}=f \phi_\beta^{-1} \phi_\beta \phi_\alpha^{-1}=h \phi_\beta \phi_\alpha^{-1}
 $$
+
+and now we are in the familiar world of calculus on $\mathbb{R}^n$.
+
+On one definition of an atlas, $\phi_\beta \phi_\alpha^{-1}$ is smooth
+with a smooth inverse. By the chain rule for calculus we have
+
+$$
+\frac{\partial g}{\partial x_i}=\sum_j \frac{\partial h}{\partial y_j}(y(x)) \frac{\partial y_j}{\partial x_i}(x)
+
 
 # Transition Maps are Smooth
 
 $$
-g=f \varphi_\alpha^{-1}=f \varphi_\beta^{-1} \varphi_\beta \varphi_\alpha^{-1}=h \varphi_\beta \varphi_\alpha^{-1}
+g=f \phi_\alpha^{-1}=f \phi_\beta^{-1} \phi_\beta \phi_\alpha^{-1}=h \phi_\beta \phi_\alpha^{-1}
 $$
 
 ```lean4

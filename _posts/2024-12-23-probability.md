@@ -3,30 +3,19 @@ date: 2024-12-23
 title: Basic probability in Mathlib
 ---
 
-How do I define a probability space and two independent random variables in Lean? Should I use `IsProbabilityMeasure` or `ProbabilityMeasure`?
-How do I condition on an event?
+Suppose we have smooth $f : M \longrightarrow \mathbb{R}$.
 
-This post answers these and other simple questions about how to express probability concepts using Mathlib.
-
-<!-- TEASER_END -->
-
-The code examples will not mention imports and will assume that we `import Mathlib` in a project that depends on Mathlib.
-Many probability related notations are defined in the file Probability/Notation.
-Including the following two lines at the beginning of a file after the imports is generally a good idea to work with probability:
-```lean
-open MeasureTheory ProbabilityTheory
-open scoped ENNReal
-```
-The first line opens namespaces, which means that we will be able to omit any `MeasureTheory.` prefix from lemma names. We will likewise omit that prefix in this text.
-The second line makes some notations available. We'll talk about that further down.
-
-
+$$
+g=f \varphi_\alpha^{-1}=f \varphi_\beta^{-1} \varphi_\beta \varphi_\alpha^{-1}=h \varphi_\beta \varphi_\alpha^{-1}
+$$
 
 # Probability spaces and probability measures
 
 This sentence uses `$` delimiters to show math inline: $\sqrt{3x-1}+(1+x)^2$
 
-$$g=f \varphi_\alpha^{-1}=f \varphi_\beta^{-1} \varphi_\beta \varphi_\alpha^{-1}=h \varphi_\beta \varphi_\alpha^{-1}$$
+$$
+g=f \varphi_\alpha^{-1}=f \varphi_\beta^{-1} \varphi_\beta \varphi_\alpha^{-1}=h \varphi_\beta \varphi_\alpha^{-1}
+$$
 
 ```lean
 import Mathlib.Geometry.Manifold.MFDeriv.Defs

@@ -29,17 +29,41 @@ $\frac{\partial y_j}{\partial x_i}(x)$ has full rank so we can conclude
 that
 
 $$
-D(f\phi_\alpha^{-1}) = 0 \iff D(f\phi_\beta) = 0
+D(f\phi_\alpha^{-1}) = 0 \iff D(f\phi_\beta^{-1}) = 0
 $$
+
+This post captures my experiences using Lean to formalise this. The user
+of Lean is not just faced with learning Lean the language and also its
+proof system via so-called tactics but also learning how the Mathlib
+authors decided to define manifolds and other necessary mathematical
+structures. The design decisions of the latter are captured in the
+Mathlib documentation.
+
+In a nutshell, the authors wanted to be able to capture manifolds with
+boundary as well as those without. It took me some time to work out how
+to restrict my proof manifolds without boundary (the ones undergraduates
+first encounter).
 
 # Transition Maps are Smooth
 
 Mathlib has its own way of defining manifolds which I won\'t elaborate
 here but this does not use the fact that transition maps are smooth with
-a smooth inverse.
+a smooth inverse. So let\'s state and prove that the transition maps are
+smooth and have a smooth inverse.
 
-Let\'s state and prove that the transition maps are smooth and have a
-smooth inverse.
+1.  Charts in Mathlib are defined as partial homeomorphisms, that is,
+    structures that have a source and a target and a continuous function
+    from the source to the target with a continuous inverse. These are
+    homeomorphisms from $M$ to $m$ dimensional Euclidean space (a
+    manifold is locally Euclidean).
+2.  To make the charts smooth we declare them as elements of the maximal
+    (presumably smooth) atlas on $M$.
+3.  Adding `.symm`{.verbatim} as a suffix gives the inverse of the
+    homeomorphism and `.trans`{.verbatim} allows a partial homeomorphism
+    to composed with another taking into account the sources and
+    targets.
+4.  `h2`{.verbatim} and `h3`{.verbatim} state that $\phi_\beta$ and the
+    inverse of $\phi_\alpha$ are smooth.
 
 ``` lean4
 import Mathlib.Geometry.Manifold.MFDeriv.Defs
@@ -48,6 +72,7 @@ import Mathlib.Analysis.InnerProductSpace.PiL2
 import Mathlib.Geometry.Manifold.AnalyticManifold
 import Mathlib.Geometry.Manifold.ContMDiff.Atlas
 import Mathlib.Geometry.Manifold.MFDeriv.SpecificFunctions
+import Mathlib
 
 open Manifold
 
@@ -74,12 +99,12 @@ theorem contMDiffAt_chart_transition
     have h5 : ContMDiffAt (𝓡 m) (𝓡 m) ⊤ φ_β (φ_α.symm (φ_α x)) := by
       rw [h4]
       exact h2
-    have h7 : ContMDiffAt (𝓡 m) (𝓡 m) ⊤ (φ_β ∘ φ_α.symm) (φ_α x) :=
+    have h6 : ContMDiffAt (𝓡 m) (𝓡 m) ⊤ (φ_β ∘ φ_α.symm) (φ_α x) :=
       ContMDiffAt.comp (I' := 𝓡 m) (φ_α x) h5 h3
-    have h8 : ContMDiffAt (𝓡 m) (𝓡 m) ⊤ (φ_α.symm.trans φ_β) (φ_α x) := by
+    have h7 : ContMDiffAt (𝓡 m) (𝓡 m) ⊤ (φ_α.symm.trans φ_β) (φ_α x) := by
       rw [h1]
-      exact h7
-    exact h8
+      exact h6
+    exact h7
 ```
 
 We want the transition maps be smooth as functions on $\mathbb{R}^n$:

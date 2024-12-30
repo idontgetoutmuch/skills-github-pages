@@ -58,12 +58,19 @@ smooth and have a smooth inverse.
     manifold is locally Euclidean).
 2.  To make the charts smooth we declare them as elements of the maximal
     (presumably smooth) atlas on $M$.
-3.  Adding `.symm`{.verbatim} as a suffix gives the inverse of the
-    homeomorphism and `.trans`{.verbatim} allows a partial homeomorphism
+3.  Adding `.symm` as a suffix gives the inverse of the
+    homeomorphism and `.trans` allows a partial homeomorphism
     to composed with another taking into account the sources and
     targets.
-4.  `h2`{.verbatim} and `h3`{.verbatim} state that $\phi_\beta$ and the
+4.  `h2` and `h3` state that $\phi_\beta$ and the
     inverse of $\phi_\alpha$ are smooth.
+5.  After a bit of manipulation, we can apply the chain rule to deduce
+    `h6` that the transition map is smooth.
+6.  And finally a bit more manipulation proves the theorem.
+
+The only tactic used is `rw` which re-writes terms if it
+finds a match. The rest of the proof is finding existing theorems. I
+found [moogle](https://www.moogle.ai/) very useful for this.
 
 ``` lean4
 import Mathlib.Geometry.Manifold.MFDeriv.Defs
